@@ -1,25 +1,45 @@
-/* Custom styles for EmergenSys */
+/* Base CSS variables for themes */
 :root {
   /* Light mode variables */
   --background-primary: #ffffff;
   --background-secondary: #f8f9fa;
+  --background-tertiary: #f1f3f5;
   --text-primary: #212529;
   --text-secondary: #6c757d;
+  --text-tertiary: #adb5bd;
   --border-color: #dee2e6;
-  --accent-color: #0d6efd;
-  --card-bg: #ffffff;
-  --shadow: rgba(0, 0, 0, 0.1);
+  --border-color-focus: #86b7fe;
+  --accent-color: #dc3545;
+  --accent-color-hover: #c82333;
+  --success-color: #198754;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #0dcaf0;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, .175);
 }
 
-[data-theme="dark"] {
+/* Dark mode variables */
+[data-theme="dark"],
+.dark {
   --background-primary: #121212;
   --background-secondary: #1e1e1e;
+  --background-tertiary: #2d2d2d;
   --text-primary: #f8f9fa;
   --text-secondary: #ced4da;
+  --text-tertiary: #6c757d;
   --border-color: #495057;
-  --accent-color: #3d8bfd;
-  --card-bg: #2d2d2d;
-  --shadow: rgba(0, 0, 0, 0.5);
+  --border-color-focus: #0d6efd;
+  --accent-color: #dc3545;
+  --accent-color-hover: #bb2d3b;
+  --success-color: #20c997;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #0dcaf0;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow: 0 .5rem 1rem rgba(0, 0, 0, .4);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, .5);
 }
 
 /* Base styles */
@@ -29,59 +49,105 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-card,
-.panel,
-.container-custom {
-  background-color: var(--card-bg);
-  border-color: var(--border-color);
-}
-
+/* Form elements */
 input, 
-select, 
 textarea, 
-button:not(.btn-primary) {
+select {
+  background-color: var(--background-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+input:focus, 
+textarea:focus, 
+select:focus {
+  border-color: var(--border-color-focus) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color-hover) !important;
+  border-color: var(--accent-color-hover) !important;
+}
+
+/* Cards and panels */
+.card, 
+.panel {
   background-color: var(--background-secondary);
-  color: var(--text-primary);
   border-color: var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
-table {
-  background-color: var(--background-secondary);
-  color: var(--text-primary);
-}
-/* Dark mode styles */
-.dark {
-  color-scheme: dark;
+/* Utility classes for dark mode compatibility */
+.text-dark {
+  color: var(--text-primary) !important;
 }
 
-/* Focus styles for accessibility */
-:focus-visible {
-  outline: 2px solid rgba(239, 68, 68, 0.5);
+.bg-light {
+  background-color: var(--background-secondary) !important;
+}
+
+/* Ensure transitions are smooth */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Animation for form steps */
+.step-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility focus styles */
+:focus {
+  outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #dc2626;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #b91c1c;
-}
-
-/* Alert styling */
-.alert-success {
-  background-color: rgba(16, 185, 129, 0.1);
-  border-left: 4px solid rgb(16, 185, 129);
+/* Print styles */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}  border-left: 4px solid rgb(16, 185, 129);
   color: rgb(6, 95, 70);
 }
 
