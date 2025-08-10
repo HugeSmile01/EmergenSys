@@ -146,18 +146,55 @@
             <p id="typeError" class="text-red-500 text-xs mt-1 hidden">Please select an emergency type</p>
           </div>
           
-          <div>
-            <label for="location" class="block font-semibold mb-1 dark:text-white">Location <span class="text-red-500">*</span></label>
-            <div class="relative">
-              <input id="location" type="text" class="w-full p-2 border dark:bg-gray-700 dark:text-white dark:border-gray-600 rounded focus:outline-red-500" 
-                placeholder="Address or location description" required aria-required="true">
-              <button type="button" id="getLocationBtn" class="absolute right-2 top-2 text-red-600 dark:text-red-400" aria-label="Get current location">
-                📍
-              </button>
-            </div>
-            <p id="locationError" class="text-red-500 text-xs mt-1 hidden">Please provide a location</p>
-          </div>
-        </div>
+          <div class="location-container bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+  <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Your Location</h3>
+  
+  <div class="mb-4">
+    <div class="flex items-center">
+      <input 
+        type="checkbox" 
+        id="shareLocation" 
+        class="mr-2 h-4 w-4 text-blue-600"
+        onchange="toggleLocationSharing(this.checked)"
+      >
+      <label for="shareLocation" class="text-sm text-gray-700 dark:text-gray-300">
+        Share my current location (optional)
+      </label>
+    </div>
+    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+      Your location helps emergency responders reach you faster
+    </p>
+  </div>
+  
+  <div id="locationStatus" class="text-sm mb-3 hidden"></div>
+  
+  <div id="manualLocationInput" class="hidden">
+    <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Or enter your location manually:
+    </p>
+    <div class="grid grid-cols-2 gap-2 mb-3">
+      <input 
+        type="text" 
+        id="addressInput" 
+        placeholder="Street address" 
+        class="p-2 border rounded text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+      <input 
+        type="text" 
+        id="cityInput" 
+        placeholder="City" 
+        class="p-2 border rounded text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+    </div>
+    <button 
+      id="saveManualLocation" 
+      class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm transition"
+      onclick="saveManualLocation()"
+    >
+      Save Location
+    </button>
+  </div>
+</div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
